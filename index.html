@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NFT RENT — аренда коллекционных NFT‑подарков</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07080c;
+      --bg-soft: #0f1220;
+      --accent: #8b5cf6;
+      --accent-2: #22d3ee;
+      --text: #f4f5fb;
+      --muted: #b3b7c9;
+      --glass: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Manrope", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(139, 92, 246, 0.35), transparent),
+        radial-gradient(900px 700px at 85% 0%, rgba(34, 211, 238, 0.25), transparent),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 32px 0 16px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-cta {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #0b0d14;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .hero {
+      padding: 64px 0 80px;
+      display: grid;
+      gap: 48px;
+      align-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-top: 20px;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #0b0d14;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text);
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      border-radius: 28px;
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero-card .badge {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(139, 92, 246, 0.18);
+      color: #cbb7ff;
+      width: fit-content;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 16px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat span {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 16px;
+    }
+
+    .section p {
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    .grid {
+      margin-top: 40px;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      padding: 24px;
+      border-radius: 20px;
+      background: var(--bg-soft);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      min-height: 200px;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 16px;
+    }
+
+    .step {
+      padding: 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .cta {
+      padding: 64px 0 96px;
+      text-align: center;
+    }
+
+    .cta-box {
+      padding: 48px;
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(139, 92, 246, 0.25), rgba(34, 211, 238, 0.15));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    footer {
+      padding: 32px 0 48px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      .cta-box {
+        padding: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <div class="logo">NFT RENT</div>
+      <div class="nav-links">
+        <a href="#features">Почему мы</a>
+        <a href="#process">Как это работает</a>
+        <a href="#trust">Доверие</a>
+      </div>
+      <a class="nav-cta" href="#cta">Запросить доступ</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Самый быстрый сервис аренды коллекционных NFT‑подарков.</h1>
+        <p>Мы выдаем в аренду цифровые подарки для мерчей, VIP‑привилегий и событий. Всё — за минуты: от заявки до передачи в кошелек.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#cta">Начать за 5 минут</a>
+          <a class="btn-secondary" href="#process">Узнать подробнее</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <span class="badge">NFT RENT / 2024</span>
+        <h2>Арендуйте статус, эмоцию и доверие без покупки коллекции.</h2>
+        <div class="hero-stats">
+          <div class="stat">
+            <span>5 мин</span>
+            <small>средняя выдача</small>
+          </div>
+          <div class="stat">
+            <span>24/7</span>
+            <small>поддержка сделки</small>
+          </div>
+          <div class="stat">
+            <span>99.9%</span>
+            <small>надежность передачи</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <h2>Экосистема аренды для брендов, комьюнити и частных клиентов.</h2>
+      <p>Мы создаем инфраструктуру, чтобы вы могли дарить редкие NFT‑подарки без капитальных затрат и риска. Всё управление — в одном окне.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Мгновенная выдача</h3>
+          <p>Подключение к кошельку и оформление аренды за один сценарий, без сложных интеграций.</p>
+        </div>
+        <div class="card">
+          <h3>Умные условия</h3>
+          <p>Гибкие сроки, автоматическое продление и контроль возврата — всё закреплено в договоре.</p>
+        </div>
+        <div class="card">
+          <h3>White‑label опыт</h3>
+          <p>Оформление, уведомления и брендированные лендинги под ваши кампании.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <h2>Как это работает</h2>
+      <p>Никакой бюрократии — только четкий поток от запроса до активации подарка.</p>
+      <div class="steps">
+        <div class="step">
+          <strong>1.</strong> Выбираете формат аренды и задаете срок.
+        </div>
+        <div class="step">
+          <strong>2.</strong> Подписываете условия через цифровой договор.
+        </div>
+        <div class="step">
+          <strong>3.</strong> Получаете NFT‑подарок на кошелек с поддержкой нашей команды.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="trust">
+      <h2>Доверие, безопасность, прозрачность.</h2>
+      <p>Мы строим сервис вокруг контроля рисков: верификация партнеров, мониторинг транзакций и полная аналитика для команды.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Юридическая чистота</h3>
+          <p>Договоры аренды, зафиксированные условия передачи и возврата, закрывают все риски.</p>
+        </div>
+        <div class="card">
+          <h3>Служба сопровождения</h3>
+          <p>Команда 24/7 ведет сделку и помогает в любой точке мира.</p>
+        </div>
+        <div class="card">
+          <h3>Аналитика статуса</h3>
+          <p>Дашборды показывают, где находится подарок и когда он возвращается.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="cta" id="cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Готовы сдавать в аренду подарки быстрее рынка?</h2>
+        <p>Оставьте заявку, и мы подключим вас к NFT RENT за один рабочий день.</p>
+        <div class="hero-actions" style="justify-content: center;">
+          <a class="btn-primary" href="mailto:hello@nft-rent.com">Запросить демо</a>
+          <a class="btn-secondary" href="#features">Смотреть преимущества</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container">
+    <div>© 2024 NFT RENT. Коллекционная аренда без компромиссов.</div>
+  </footer>
+</body>
+</html>
